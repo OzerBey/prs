@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./css/App.css";
+import "./components/signup/signup.css";
+import Login from "../src/components/login/Login";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SignUp from "./components/signup/SignUp";
+import { PatientRegister } from "./components/patients/PatientRegister";
+import { NotFoundPage } from "./components/errors/NotFoundPage";
+import { Patients } from "./components/Patients";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Patient Registration System</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="patients" element={<Patients />} />
+          <Route path="patients-registration" element={<PatientRegister />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
