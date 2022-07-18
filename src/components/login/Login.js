@@ -1,12 +1,14 @@
 /* eslint-disable no-restricted-globals */
 import React, { useState, useEffect } from "react";
 import alertify from "alertifyjs";
+
 const Login = () => {
   const intialValues = { email: "", password: "" };
 
   const [formValues, setFormValues] = useState(intialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   const submit = () => {
     console.log(formValues); //looged to console
@@ -23,6 +25,13 @@ const Login = () => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmitting(true);
+
+    if (formValues.email === "" || formValues.password === "") {
+      console.error("Please enter all fields");
+    } else {
+      setIsSubmitting(true);
+      setIsSignedIn(true);
+    }
   };
 
   //form validation handler
@@ -45,6 +54,10 @@ const Login = () => {
     return errors;
   };
 
+  const goToDoctorPage = () => {
+    setIsSignedIn(true);
+  };
+
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmitting) {
       submit();
@@ -53,16 +66,17 @@ const Login = () => {
 
   return (
     <div className="loginPage">
-      <h1>Sign in to continue</h1>
       <img
         className="loginPic"
-        src="https://images.theconversation.com/files/109409/original/image-20160127-26769-10vf6m4.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip"
+        src="https://images.squarespace-cdn.com/content/v1/5d2d63137e6ae200016b6c62/1581858390465-H7ATJAIP6V20XNF63ZZ4/Revenue+Cycle+Services.jpg?format=1500w"
         alt="doctorPic"
       />
+      <h1>Sign in to continue</h1>
       {Object.keys(formErrors).length === 0 && isSubmitting && (
         <div className="success">
           <h3>User {name} successfully signed!!</h3>
-          <span>{alertify.success("Form submitted successfully")}</span>
+          {/* <span>{alertify.success("Form submitted successfully")}</span> */}
+          {/* <Doctor /> */}
         </div>
       )}
       <form onSubmit={handleSubmit} noValidate className="form">
@@ -78,7 +92,7 @@ const Login = () => {
             onChange={handleChange}
           />
         </div>
-        {formErrors.email && <span>{formErrors.email}</span>}
+        <div>{isSubmitting && <span>{formErrors.email}</span>}</div>
 
         <div className="inputText">
           <label htmlFor="password" className="label">
@@ -92,7 +106,7 @@ const Login = () => {
             onChange={handleChange}
           />
         </div>
-        {formErrors.password && <span>{formErrors.password}</span>}
+        <div>{isSubmitting && <span>{formErrors.password}</span>}</div>
         <button className="submitButton" type="submit">
           Sign In
         </button>
@@ -100,6 +114,9 @@ const Login = () => {
           I've no any account
         </a>
       </form>
+      {/* <h1>
+        <span>{isSignedIn ? <Doctor /> : "Not allowed"}</span>
+      </h1> */}
     </div>
   );
 };

@@ -1,0 +1,102 @@
+.loginPic {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  height: fit-content;
+  margin-top: 5px;
+  border-radius: 40%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  height: 100%;
+  background-color: #282c34;
+  color: white;
+  border: white solid 1px;
+  border-radius: 10px;
+}
+
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  background-color: #282c34;
+  color: white;
+}
+
+.submitButton {
+  width: 10%;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid #61dafb;
+  background-color: #61dafb;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.submitButton:hover {
+  background-color: #61dafb;
+  color: white;
+}
+.error {
+  color: red;
+  font-size: 20px;
+  font-weight: bold;
+}
+.errorMessage {
+  color: red;
+  font-size: 20px;
+  font-weight: bold;
+}
+.success {
+  color: green;
+  font-size: 20px;
+  font-weight: bold;
+}
+.successMessage {
+  color: green;
+  font-size: 20px;
+  font-weight: bold;
+}
+.logoutButton {
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid #61dafb;
+  background-color: #61dafb;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.logoutButton:hover {
+  background-color: #61dafb;
+  color: white;
+}
+.logoutButton:active {
+  background-color: #61dafb;
+  color: white;
+}
+.logoutButton:focus {
+  background-color: #61dafb;
+  color: white;
+}
+.logoutButton:hover:active {
+  background-color: #61dafb;
+  color: white;
+}
+.label {
+  display: block;
+  font-size: larger;
+  color: white;
+  padding: 5px;
+}

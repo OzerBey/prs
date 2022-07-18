@@ -1,52 +1,63 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./signup.css";
 
 export default function SignUp() {
+  const intialValues = { name: "", email: "", password: "" };
+
   // States for registration
-  const intialValues = { email: "", password: "" };
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [formValues, setFormValues] = useState(intialValues);
-  const [formErrors, setFormErrors] = useState({});
 
   // States for checking the errors
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
 
-  // Handling the name change
-  const handleName = (e) => {
-    setName(e.target.value);
-    setSubmitted(false);
+  const submit = () => {
+    console.log(formValues);
   };
 
-  // Handling the email change
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-    setSubmitted(false);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
   };
 
-  // Handling the password change
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-    setSubmitted(false);
-  };
+  //!? // Handling the name change
+  // const handleName = (e) => {
+  //   setName(e.target.value);
+  //   setSubmitted(false);
+  // };
 
-  // Handling the form submission
+  // // Handling the email change
+  // const handleEmail = (e) => {
+  //   setEmail(e.target.value);
+  //   setSubmitted(false);
+  // };
+
+  // // Handling the password change
+  // const handlePassword = (e) => {
+  //   setPassword(e.target.value);
+  //   setSubmitted(false);
+  // };
+
+  // Handling the form submission and validation
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormErrors(validate(formValues));
+    setError(validate(formValues));
     setSubmitted(true);
 
-    if (name === "" || email === "" || password === "") {
+    if (
+      formValues.name === "" ||
+      formValues.email === "" ||
+      formValues.password === ""
+    ) {
       setError(true);
+      setSubmitted(false);
     } else {
       setSubmitted(true);
       setError(false);
     }
   };
 
-  // Showing success message
+  // Showing success message on top of the page
   const successMessage = () => {
     return (
       <div
@@ -55,7 +66,7 @@ export default function SignUp() {
           display: submitted ? "" : "none",
         }}
       >
-        <h1>User {name} successfully registered!!</h1>
+        <h1>User {formValues.name} successfully registered!!</h1>
       </div>
     );
   };
@@ -94,47 +105,54 @@ export default function SignUp() {
     return errors;
   };
 
+  useEffect(() => {
+    if (Object.keys(error).length === 0 && submitted) {
+      submit();
+    }
+  }, [error, submitted, submit]);
+
   return (
     <div className="form">
       <div>
         <h1>User Registration</h1>
       </div>
 
-      {/* Calling to the methods */}
+      {/* Calling to the method by stataemnt */}
       <div className="messages">
         {errorMessage()}
         {successMessage()}
       </div>
 
-      <form>
+      <form validate>
         {/* Labels and inputs for form data */}
         <label className="label">Name</label>
         <input
-          onChange={handleName}
           className="input"
-          value={name}
+          value={formValues.name}
           type="text"
+          onChange={handleChange}
         />
 
         <label className="label">Email</label>
         <input
-          onChange={handleEmail}
           className="input"
-          value={email}
+          value={formValues.email}
           type="email"
+          onChange={handleChange}
         />
 
         <label className="label">Password</label>
         <input
-          onChange={handlePassword}
           className="input"
-          value={password}
+          value={formValues.password}
           type="password"
+          onChange={handleChange}
         />
 
         <button onClick={handleSubmit} className="btn" type="submit">
           Submit
         </button>
+        <a href="/">Already have an account?</a>
       </form>
     </div>
   );
