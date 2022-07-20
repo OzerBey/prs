@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #61dafb;
 }
 
 .App-logo {
@@ -35,4 +36,126 @@
   to {
     transform: rotate(360deg);
   }
+}
+*/ App CSS .underLine {
+  text-decoration: underline;
+}
+.red {
+  color: red;
+}
+.border {
+  border: 1px solid rgb(3, 218, 3);
+}
+.notFound {
+  background-color: red;
+  color: white;
+  padding: "81px";
+  border-radius: "5px";
+  margin-top: 300px;
+  width: 100%;
+  height: 100%;
+  font-size: 100px;
+  text-align: "center";
+}
+
+/* category page CSS */
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+/* navigation bar CSS*/
+.navbar {
+  flex-direction: row;
+  align-items: center;
+  color: #000000; /*color of  my logo */
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  height: 100px;
+  border: #000000 solid 1px;
+  margin-bottom: 10px;
+}
+
+.navbar-brand {
+  font-size: 30px;
+  font-family: "Roboto", sans-serif;
+}
+
+.navbar-button {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  margin-left: 10px;
+}
+.navbar a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+.navbar a:hover {
+  color: rgb(3, 218, 3);
+}
+.navbar a:active {
+  color: rgb(223, 32, 32);
+  background-attachment: fixed;
+  background-color: #61dafb;
+}
+
+.navbar a:focus {
+  color: rgb(223, 32, 32);
+}
+
+.navbar a::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: rgb(3, 218, 3);
+  transition: width 0.3s ease-in-out;
+  margin-top: 10px;
+}
+
+/* user pic CSS*/
+.image {
+  width: 90px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.image-middle {
+  width: 70%;
+  height: 60%;
+  object-fit: cover;
+  border-radius: 8%;
+}
+
+.div-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.px100 {
+  width: 100px;
+  height: 100px;
+}
+
+.button1 {
+  background-color: #61dafb;
+  border: none;
+  width: 30%;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
 }
