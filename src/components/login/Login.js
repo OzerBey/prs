@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-globals */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import alertify from "alertifyjs";
+import { DoctorContext } from "../../contexts/DoctorContext";
 
 const Login = () => {
   const intialValues = { email: "", password: "" };
@@ -10,15 +11,19 @@ const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
 
+  //doctor context
+  const context = useContext(DoctorContext);
+  console.log("Doctorlist: ", context);
+
   //fake user data
-  const user = {
+  const admin = {
     email: "admin@gmail.com",
     password: "admin",
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const submit = () => {
-    console.log(formValues); //looged to console
+    // console.log(formValues); //looged to console
     if (isSignedIn) {
       alertify.success("You are already signed in");
     }
@@ -35,16 +40,22 @@ const Login = () => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmitting(true);
+    checkIt();
+  };
 
+  const checkIt = () => {
     if (formValues.email === "" || formValues.password === "") {
       console.error("Please enter all fields");
     } else {
       setIsSubmitting(true);
       //check if user is signed in
-      if (
-        formValues.email === user.email &&
-        formValues.password === user.password
-      ) {
+      let isSuccessfulLogin = checkUserFromData(formValues);
+      if (isSuccessfulLogin) {
+        console.log(
+          formValues.email,
+          formValues.password,
+          " from handleSubmit"
+        );
         setIsSignedIn(true);
         alertify.success("You are signed in");
       } else {
@@ -52,6 +63,35 @@ const Login = () => {
         alertify.error("Invalid credentials");
       }
     }
+  };
+
+  //user login check
+  const checkUserFromData = (formValues) => {
+    if (
+      context[0].email === formValues.email &&
+      context[0].password === formValues.password
+    ) {
+      console.log("user found");
+      sessionStorage.setItem("user", JSON.stringify(context[0]));
+      let local = localStorage.setItem("user", JSON.stringify(context[0]));
+      console.log(local);
+      return true;
+    } else {
+      console.log("user not found");
+      return false;
+    }
+    // context.forEach((user) => {
+    //   if (
+    //     user.email === formValues.email &&
+    //     user.password === formValues.password
+    //   ) {
+    //     console.log("user found");
+    //     return true;
+    //   } else {
+    //     console.log("user not found");
+    //     return false;
+    //   }
+    // });
   };
 
   //form validation handler

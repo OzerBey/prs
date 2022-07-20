@@ -1,6 +1,7 @@
 import "../../src/css/App.css";
 import "../components/signup/signup.css";
 import Login from "../components/login/Login";
+import ContextTry from "../components/login/ContextTry";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignUp from "../components/signup/SignUp";
 import { PatientRegister } from "../components/patients/PatientRegister";
@@ -69,6 +70,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Login users={doctors} />} />
                   <Route path="signup" element={<SignUp />} />
+                  <Route path="context" element={<ContextTry />} />
 
                   <Route path="patients" element={<PatientList />} />
                   <Route path="doctors" element={<DoctorList />} />

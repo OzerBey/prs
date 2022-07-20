@@ -38,6 +38,18 @@ export default function Navit() {
               resetCart={this.props.resetCart}
               removeFromCart={this.props.removeFromCart}
             /> */}
+          <details>
+            <p>{localStorage.getItem("user").name}</p>
+            <summary>Login</summary>
+            <p>
+              <NavLink style={{ border: "2px solid black" }} to="/">
+                Login
+              </NavLink>
+              <NavLink style={{ border: "2px solid black" }} to="/signUp">
+                Signup
+              </NavLink>
+            </p>
+          </details>
         </Collapse>
       </Navbar>
     </div>

@@ -98,7 +98,7 @@
   text-decoration: none;
 }
 .navbar a:hover {
-  color: rgb(3, 218, 3);
+  color: wheat;
 }
 .navbar a:active {
   color: rgb(223, 32, 32);

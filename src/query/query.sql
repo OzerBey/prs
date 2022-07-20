@@ -5,7 +5,6 @@ CREATE TABLE cities (
     CONSTRAINT PK_City PRIMARY KEY (id)
 );
 
-
 -- addresses
 CREATE TABLE addresses (
     id int NOT NULL,
@@ -44,7 +43,7 @@ CREATE TABLE patients (
 		CONSTRAINT FK_PatientsTophoto FOREIGN KEY (photo_id) REFERENCES photos(id)
 );
 
--- employees
+--!! old employees table [removed]
 CREATE TABLE employees (
     id int NOT NULL,
     address_id int NOT NULL,
@@ -57,7 +56,7 @@ CREATE TABLE employees (
 		date_of_birth DATE NOT NULL,
     PRIMARY KEY (id)
 );
--- new Employees tables query [updated]
+-- new Employees tables query [added]
 CREATE TABLE `employees` (
   `id` int NOT NULL,
   `address_id` int NOT NULL,
@@ -75,7 +74,7 @@ CREATE TABLE `employees` (
 	CONSTRAINT `FK_EmployeesToUsers` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 );
 
--- users
+-- users [addded]
 CREATE TABLE users(
 id int NOT NULL ,
 username  VARCHAR(255),
