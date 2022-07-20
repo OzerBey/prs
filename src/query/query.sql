@@ -1,4 +1,4 @@
-//cities
+-- cities
 CREATE TABLE cities (
     id int NOT NULL,
     name varchar(255) NOT NULL,
@@ -6,7 +6,7 @@ CREATE TABLE cities (
 );
 
 
-//addresses
+-- addresses
 CREATE TABLE addresses (
     id int NOT NULL,
     city_id int,
@@ -17,7 +17,7 @@ CREATE TABLE addresses (
     REFERENCES cities(id)
 );
 
-//photos
+-- photos
 CREATE TABLE photos (
     id int NOT NULL,
     photo varchar(255) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE photosBlob (
 		PRIMARY KEY (id)
 );
 
-//patients
+-- patients
 CREATE TABLE patients (
     id int NOT NULL,
     address_id int NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE patients (
 		CONSTRAINT FK_PatientsTophoto FOREIGN KEY (photo_id) REFERENCES photos(id)
 );
 
-//employees
+-- employees
 CREATE TABLE employees (
     id int NOT NULL,
     address_id int NOT NULL,
@@ -57,8 +57,33 @@ CREATE TABLE employees (
 		date_of_birth DATE NOT NULL,
     PRIMARY KEY (id)
 );
+-- new Employees tables query [updated]
+CREATE TABLE `employees` (
+  `id` int NOT NULL,
+  `address_id` int NOT NULL,
+  `nationality_id` int NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `user_id` int NOT NULL,
+  `department` varchar(255) NOT NULL,
+  `photo_id` int DEFAULT NULL,
+  `gender` varchar(5) NOT NULL,
+  `phone_number` varchar(15) NOT NULL,
+  `date_of_birth` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_PatientsToPhotos` (`photo_id`),
+  CONSTRAINT `FK_EmplpoyeesToPhotos` FOREIGN KEY (`photo_id`) REFERENCES `photos` (`id`),
+	CONSTRAINT `FK_EmployeesToUsers` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+);
 
-//doctors
+-- users
+CREATE TABLE users(
+id int NOT NULL ,
+username  VARCHAR(255),
+password VARCHAR(255),
+PRIMARY KEY(id)
+);
+
+-- doctors
 CREATE TABLE doctors (
     id int NOT NULL AUTO_INCREMENT,
     employee_id int NOT NULL,
@@ -66,7 +91,7 @@ CREATE TABLE doctors (
     CONSTRAINT FK_DoctorsToEmpolyee FOREIGN KEY (employee_id) REFERENCES employees(id)
 );
 
-//officers
+-- officers
 CREATE TABLE officers (
     id int NOT NULL,
     employee_id int NOT NULL,
@@ -74,7 +99,7 @@ CREATE TABLE officers (
     CONSTRAINT FK_OfficerToEmpolyee FOREIGN KEY (employee_id) REFERENCES employees(id)
 );
 
-//appointments
+-- appointments
 CREATE TABLE appointments (
     id int NOT NULL,
     doctor_id int NOT NULL,
@@ -85,7 +110,7 @@ CREATE TABLE appointments (
 		CONSTRAINT FK_AppinmentsToPatient FOREIGN KEY (patient_id) REFERENCES patients(id)
 );
 
-//prescriptions
+-- prescriptions
 CREATE TABLE prescriptions (
     id int NOT NULL,
     doctor_id int NOT NULL,
@@ -97,7 +122,7 @@ CREATE TABLE prescriptions (
 		CONSTRAINT FK_PrescriptionsToPatient FOREIGN KEY (patient_id) REFERENCES patients(id)
 );
 
-//getAll tables from Database
+-- getAll tables from Database
 SELECT * FROM cities;
 SELECT * FROM addresses;
 SELECT * FROM patients;
@@ -107,7 +132,7 @@ SELECT * FROM appointments;
 SELECT * FROM prescriptions;
 SELECT * FROM employees;
 
-//other queries
+-- other queries
 SELECT count(*) as kacTane FROM patients WHERE name like ("and%")
 
 SELECT *
