@@ -1,4 +1,4 @@
-/* register page */
+/* register page
 .App {
   text-align: center;
   background-color: rgb(9, 139, 20);
@@ -12,7 +12,6 @@
 }
 
 .input {
-  font-size: larger;
   padding: 5px;
   margin: 2px;
 }
@@ -66,4 +65,23 @@
 a{
   color: white;
   text-decoration: none;
+} */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  height: 60%;
+  background-color: #282c34;
+  color: white;
+  border: white solid 1px;
+  border-radius: 10px;
+  margin: auto;
+}
+
+.input {
+  padding: 5px;
+  margin: 2px;
 }

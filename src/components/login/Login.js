@@ -10,8 +10,18 @@ const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
 
+  //fake user data
+  const user = {
+    email: "admin@gmail.com",
+    password: "admin",
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const submit = () => {
     console.log(formValues); //looged to console
+    if (isSignedIn) {
+      alertify.success("You are already signed in");
+    }
   };
 
   //input change handler
@@ -30,7 +40,17 @@ const Login = () => {
       console.error("Please enter all fields");
     } else {
       setIsSubmitting(true);
-      setIsSignedIn(true);
+      //check if user is signed in
+      if (
+        formValues.email === user.email &&
+        formValues.password === user.password
+      ) {
+        setIsSignedIn(true);
+        alertify.success("You are signed in");
+      } else {
+        setIsSignedIn(false);
+        alertify.error("Invalid credentials");
+      }
     }
   };
 
@@ -41,7 +61,9 @@ const Login = () => {
 
     if (!values.email) {
       errors.email = "Can't be blank :(";
+      alertify.error("Please enter email");
     } else if (!regex.test(values.email)) {
+      alertify.error("Invalid email format !!!");
       errors.email = "Invalid email format !!!";
     }
 
@@ -50,19 +72,18 @@ const Login = () => {
     } else if (values.password.length < 4) {
       errors.password = "Password must be more than 4 characters";
     }
-
     return errors;
   };
 
-  const goToDoctorPage = () => {
-    setIsSignedIn(true);
-  };
+  // const goToDoctorPage = () => {
+  //   setIsSignedIn(true);
+  // };
 
   useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmitting) {
+    if (Object.keys(formErrors).length === 0 && isSubmitting && !isSignedIn) {
       submit();
     }
-  }, [formErrors, isSubmitting, submit]);
+  }, [formErrors, isSubmitting, submit, isSignedIn]);
 
   return (
     <div className="loginPage">
@@ -72,9 +93,11 @@ const Login = () => {
         alt="doctorPic"
       />
       <h1>Sign in to continue</h1>
-      {Object.keys(formErrors).length === 0 && isSubmitting && (
+      {Object.keys(formErrors).length === 0 && isSubmitting && isSignedIn && (
         <div className="success">
           <h3>User {name} successfully signed!!</h3>
+          {isSignedIn ? window.location.replace("/doctor") : ""}
+          {/* {isSignedIn && alertify.success("User successfully signed in")} */}
           {/* <span>{alertify.success("Form submitted successfully")}</span> */}
           {/* <Doctor /> */}
         </div>

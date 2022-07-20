@@ -113,47 +113,43 @@ export default function SignUp() {
 
   return (
     <div className="form">
-      <div>
-        <h1>User Registration</h1>
-      </div>
-
-      {/* Calling to the method by stataemnt */}
-      <div className="messages">
-        {errorMessage()}
-        {successMessage()}
-      </div>
-
-      <form validate>
-        {/* Labels and inputs for form data */}
-        <label className="label">Name</label>
-        <input
-          className="input"
-          value={formValues.name}
-          type="text"
-          onChange={handleChange}
-        />
-
-        <label className="label">Email</label>
-        <input
-          className="input"
-          value={formValues.email}
-          type="email"
-          onChange={handleChange}
-        />
-
-        <label className="label">Password</label>
-        <input
-          className="input"
-          value={formValues.password}
-          type="password"
-          onChange={handleChange}
-        />
-
-        <button onClick={handleSubmit} className="btn" type="submit">
-          Submit
-        </button>
-        <a href="/">Already have an account?</a>
+      <h1>Sign Up</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input
+            type="text"
+            name="name"
+            value={formValues.name}
+            onChange={handleChange}
+          />
+          <br />
+          <br />
+        </label>
+        <label>
+          Email:
+          <input
+            type="text"
+            name="email"
+            value={formValues.email}
+            onChange={handleChange}
+          />
+          <br />
+          <br />
+        </label>
+        <label>
+          Password:
+          <input
+            type="password"
+            name="password"
+            value={formValues.password}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit">Submit</button>
       </form>
+      {successMessage()}
+      {errorMessage()}
     </div>
   );
 }
