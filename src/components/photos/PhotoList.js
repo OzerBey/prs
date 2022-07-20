@@ -41,7 +41,7 @@ function PhotoList() {
               <td>
                 <img
                   className="image"
-                  src={require("../photos/person1.png")}
+                  src={require("../../photo/person1.png")}
                   alt="photo"
                 />
               </td>
